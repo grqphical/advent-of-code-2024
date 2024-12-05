@@ -34,6 +34,7 @@ for line in update_lines:
     updates.append(update)
 
 correct_updates: list[list[int]] = []
+incorrect_updates: list[list[int]] = []
 
 for update in updates:
     is_correct = True
@@ -43,6 +44,7 @@ for update in updates:
 
         if update.index(rule[0]) > update.index(rule[1]):
             is_correct = False
+            incorrect_updates.append(update)
 
     if is_correct:
         correct_updates.append(update)
@@ -50,6 +52,32 @@ for update in updates:
 sum = 0
 
 for update in correct_updates:
+    mid = (len(update) - 1) // 2
+    sum += update[mid]
+
+print(sum)
+
+# PART TWO
+sum = 0
+sorted_updates = []
+
+for i in range(len(incorrect_updates)):
+    update = incorrect_updates[i]
+
+    for rule in rules:
+        if rule[0] not in update or rule[1] not in update:
+            continue
+
+        if update.index(rule[0]) > update.index(rule[1]):
+            index_a, index_b = update.index(rule[0]), update.index(rule[1])
+
+            update[index_a] = rule[1]
+            update[index_b] = rule[0]
+
+            if update not in sorted_updates:
+                sorted_updates.append(update)
+
+for update in sorted_updates:
     mid = (len(update) - 1) // 2
     sum += update[mid]
 
