@@ -53,3 +53,41 @@ for i in range(n):
                 count += 1
 
 print(count)
+
+# PART TWO
+count = 0
+
+for row in range(len(word_search)):
+    for col in range(len(word_search[row])):
+        if row + 2 < len(word_search) and col + 2 < len(word_search[row]):
+            if word_search[row][col] == "M" and word_search[row][col + 2] == "S":
+                if word_search[row + 1][col + 1] == "A":
+                    if (
+                        word_search[row + 2][col] == "M"
+                        and word_search[row + 2][col + 2] == "S"
+                    ):
+                        count += 1
+            elif word_search[row][col] == "S" and word_search[row][col + 2] == "S":
+                if word_search[row + 1][col + 1] == "A":
+                    if (
+                        word_search[row + 2][col] == "M"
+                        and word_search[row + 2][col + 2] == "M"
+                    ):
+                        count += 1
+            elif word_search[row][col] == "M" and word_search[row][col + 2] == "M":
+                if word_search[row + 1][col + 1] == "A":
+                    if (
+                        word_search[row + 2][col] == "S"
+                        and word_search[row + 2][col + 2] == "S"
+                    ):
+                        count += 1
+            elif word_search[row][col] == "S" and word_search[row][col + 2] == "M":
+                if word_search[row + 1][col + 1] == "A":
+                    if (
+                        word_search[row + 2][col] == "S"
+                        and word_search[row + 2][col + 2] == "M"
+                    ):
+                        count += 1
+
+
+print(count)
